@@ -17,6 +17,13 @@ import org.jooq.sources.tables.Users;
 
 @Path("/user")
 public class User {
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String hello() {
+        return "User endpoint";
+    }
+
     /**
      * Endpoint to check if username exists
      * @param userClient - username given by client
