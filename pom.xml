@@ -113,6 +113,13 @@
         </dependency>
 
         <!-- END jooq and postgreSQL -->
+        <!-- Encryption -->
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+            <version>1.9.3</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 
@@ -170,6 +177,7 @@
                         <artifactId>postgresql</artifactId>
                         <version>42.3.3</version>
                     </dependency>
+
                 </dependencies>
 
                 <configuration>

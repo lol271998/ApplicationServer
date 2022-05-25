@@ -1,125 +1,55 @@
 package com.app;
 
-import jakarta.ws.rs.*;
+import org.jasypt.util.password.BasicPasswordEncryptor;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import org.jooq.DSLContext;
-import org.jooq.SQLDialect;
-import org.jooq.exception.DataAccessException;
-import org.jooq.impl.DSL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.util.List;
-
-import org.jooq.sources.tables.Users;
-
-@Path("/user")
 public class User {
+    private final String username;
+    private final String password;
 
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
-        return "User endpoint";
+    public User(String username, String password) {
+        this.username = username;
+        this.password = encryptPassword(password);
     }
 
-    /**
-     * Endpoint to check if username exists
-     * @param userClient - username given by client
-     * @return username if exists
-     */
-    @GET
-    @Path("/info/{user}")
-    @Produces("application/json")
-    public Response getUserInformation(@PathParam("user") String userClient) {
-        // Returns username if exists
-        try (Connection connection = DriverManager.getConnection(
-                GlobalConst.url,
-                GlobalConst.user,
-                GlobalConst.pass)
-        ) {
-            System.out.println("Connected");
-            DSLContext create = DSL.using(connection, SQLDialect.POSTGRES);
-            create.select(Users.USERS.USERNAME).from(Users.USERS).fetch();
-            List<?> r = create.select(Users.USERS.USERNAME).from(Users.USERS).where(Users.USERS.USERNAME.eq(userClient)).fetch("username");
-            if(r.size() == 1) return Response.ok("User Exists").build();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return Response.status(500,"Server error").build();
-        }
-        return Response.status(404,"User not found").build();
-    }
-
-    /**
-     * TODO - password integration
-     * Endpoint to registration in the database
-     * @param nick - nickname intended for registration
-     * @param pwd - password intended for registration
-     * @return string with failed or accepted
-     */
-    @POST
-    @Path("/register")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces ("application/json")
-    public Response register(@FormParam("nick") String nick, @FormParam("pwd") String pwd) {
-        System.out.println("NICK: " + nick);
-        if(nick == null || nick.equals("")) return Response.status(400,"User can't be empty").build();
-
+    private String encryptPassword(String passwordToHash) {
+        String generatedPassword = null;
         try {
-            System.out.println("Connecting to db ...");
-            Connection con = DriverManager.getConnection(GlobalConst.url, GlobalConst.user, GlobalConst.pass);
-            System.out.println("Connected to db");
+            // Create MessageDigest instance for MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
 
-            DSLContext create = DSL.using(con, SQLDialect.POSTGRES);
+            // Add password bytes to digest
+            md.update(passwordToHash.getBytes());
 
-            create.insertInto(Users.USERS, Users.USERS.USERNAME).values(nick).execute();
-            System.out.println("Success");
-            return Response.ok("User registered with success").build();
+            // Get the hash's bytes
+            byte[] bytes = md.digest();
 
-        } catch (DataAccessException e) {
+            // This bytes[] has bytes in decimal format. Convert it to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for (byte aByte : bytes) {
+                sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
+            }
+
+            // Get complete hashed password in hex format
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            return Response.status(409, "User Already exists").build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Response.status(500,"Unknown Server Error").build();
         }
+        return generatedPassword;
     }
 
-    /**
-     * TODO - password integration
-     * Endpoint for login in the app
-     * @param nick - nickname for login
-     * @param pwd - password for login
-     * @return success or fail
-     */
-    @POST
-    @Path("/login")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces("application/json")
-    public Response login(@FormParam("nick") String nick, @FormParam("pwd") String pwd) {
-        System.out.println("Nick: " + nick);
-        if(nick == null || nick.equals("")) return Response.status(400,"User can't be empty").build();
-        try {
-            System.out.println("Connecting to db ...");
-            Connection con = DriverManager.getConnection(GlobalConst.url, GlobalConst.user, GlobalConst.pass);
-            System.out.println("Connected to db");
+    public Boolean checkPassword(String p2) {
+        return password.equals(p2);
+    }
 
-            System.out.println("Making query ...");
-            DSLContext create = DSL.using(con, SQLDialect.POSTGRES);
-            List<?> r = create.select(Users.USERS.USERNAME).from(Users.USERS).where(Users.USERS.USERNAME.eq(nick)).fetch("username");
+    public String getUsername() {
+        return username;
+    }
 
-            System.out.println(r);
-            if (r.size() == 1) return Response.ok("User Exists").build();
-
-            return Response.ok("Login successful").build();
-        } catch (DataAccessException e) {
-            e.printStackTrace();
-            return Response.status(409, "User Already exists").build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Response.status(500,"Unknown Server Error").build();
-        }
+    public String getPassword() {
+        return password;
     }
 }

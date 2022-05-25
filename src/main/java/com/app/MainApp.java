@@ -15,13 +15,11 @@ public class MainApp {
     public static Server startServer() {
 
         // scan packages
-        // final ResourceConfig config = new ResourceConfig().packages("com.mkyong");
+        final ResourceConfig config = new ResourceConfig().packages("com.app");
 
-        final ResourceConfig config = new ResourceConfig(MyResource.class);
-        final Server server =
-                JettyHttpContainerFactory.createServer(URI.create(BASE_URI), config);
+        // final ResourceConfig config = new ResourceConfig(MyResource.class);
 
-        return server;
+        return JettyHttpContainerFactory.createServer(URI.create(BASE_URI), config);
 
     }
 
@@ -41,7 +39,7 @@ public class MainApp {
                 }
             }));
 
-            System.out.println(String.format("Application started.%nStop the application using CTRL+C"));
+            System.out.printf("Application started.%nStop the application using CTRL+C%n");
 
             // block and wait shut down signal, like CTRL+C
             Thread.currentThread().join();
