@@ -25,34 +25,6 @@ public class UserEndPoint {
     }
 
     /**
-     * Endpoint to check if username exists
-     *
-     * @param userClient - username given by client
-     * @return username if exists
-     */
-    @GET
-    @Path("/info/{user}")
-    @Produces("application/json")
-    public Response getUserInformation(@PathParam("user") String userClient) {
-        // Returns username if exists
-        try (Connection connection = DriverManager.getConnection(
-                GlobalConst.url,
-                GlobalConst.user,
-                GlobalConst.pass)
-        ) {
-            System.out.println("Connected");
-            DSLContext create = DSL.using(connection, SQLDialect.POSTGRES);
-            create.select(Users.USERS.USERNAME).from(Users.USERS).fetch();
-            List<?> r = create.select(Users.USERS.USERNAME).from(Users.USERS).where(Users.USERS.USERNAME.eq(userClient)).fetch("username");
-            if (r.size() == 1) return Response.ok("User Exists").build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Response.status(500, "Server error").build();
-        }
-        return Response.status(404, "User not found").build();
-    }
-
-    /**
      * Endpoint to registration in the database
      *
      * @param nick - nickname intended for registration
