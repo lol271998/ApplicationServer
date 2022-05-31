@@ -30,12 +30,13 @@ public class MoviesEndPoint {
             Connection con = DriverManager.getConnection(GlobalConst.url, GlobalConst.user, GlobalConst.pass);
             System.out.println("Connected to db");
 
-            System.out.println("Making query ...");
+            System.out.println("Making query for movies ...");
             DSLContext create = DSL.using(con, SQLDialect.POSTGRES);
             List<?> title = create.select(Movie.MOVIE.TITLE).from(Movie.MOVIE).fetch("title");
             List<?> release_year = create.select(Movie.MOVIE.RELEASE_YEAR).from(Movie.MOVIE).fetch("release_year");
             List<?> duration = create.select(Movie.MOVIE.DURATION).from(Movie.MOVIE).fetch("duration");
             List<?> link = create.select(Movie.MOVIE.LINK).from(Movie.MOVIE).fetch("link");
+            List<?> link_pic = create.select(Movie.MOVIE.LINK_PIC).from(Movie.MOVIE).fetch("link_pic");
 
             Statement stmt = con.createStatement();
             String sql = "SELECT * FROM movie";
@@ -57,8 +58,11 @@ public class MoviesEndPoint {
                 System.out.println(g);
                 int d = (int) duration.get(i);
                 String l = link.get(i).toString();
+                String p = "";
+                if(link_pic.get(i) != null) p = link_pic.get(i).toString();
+                System.out.println(p);
 
-                Movies m = new Movies(t, y, g, d, l);
+                Movies m = new Movies(t, y, g, d, l,p);
                 System.out.println(m);
                 moviesList.add(m);
             }

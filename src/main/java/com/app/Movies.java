@@ -6,13 +6,15 @@ public class Movies {
     private String[] genre;
     private int duration;
     private String link;
+    private String link_pic;
 
-    public Movies(String title, int release_year, String[] genre, int duration, String link) {
+    public Movies(String title, int release_year, String[] genre, int duration, String link, String link_pic) {
         this.title = title;
         this.release_year = release_year;
         this.genre = genre;
         this.duration = duration;
         this.link = link;
+        this.link_pic = link_pic;
     }
 
     public String getTitle() {
@@ -34,4 +36,6 @@ public class Movies {
     public String getLink() {
         return link;
     }
+
+    public String getLink_pic() { return link_pic; }
 }

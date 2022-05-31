@@ -20,7 +20,8 @@ create table if not exists movie
     release_year integer,
     genre        varchar(100)[],
     duration     integer,
-    link         varchar(100) not null
+    link         varchar(100) not null,
+    link_pic     varchar(200)
 );
 
 alter table movie
@@ -55,25 +56,31 @@ VALUES (1,
         1937,
         ARRAY ['Comedy','Animation'],
         1018,
-        'https://storage.cloud.google.com/movies-pdm/PopeyeAliBaba_512kb.mp4'),
-       (2,
+        'https://storage.googleapis.com/movies-pdm/PopeyeAliBaba_512kb.mp4',
+        'https://upload.wikimedia.org/wikipedia/en/thumb/5/58/PopeyeSailor_MeetsAliBabas_FortyThieves-onesheet.jpg/220px-PopeyeSailor_MeetsAliBabas_FortyThieves-onesheet.jpg'),
+        (2,
         'Charlie Chaplin’s ”The Vagabond”',
         1916,
         ARRAY ['Comedy'],
         1483,
-        'https://storage.cloud.google.com/movies-pdm/CC_1916_07_10_TheVagabond.mp4'),
-       (3,
-        'The Letter, Lego movie',
-        2003,
-        ARRAY ['Animation','LEGO'],
-        390,
-        'https://storage.cloud.google.com/movies-pdm/tl_512kb.mp4'),
+        'https://storage.googleapis.com/movies-pdm/CC_1916_07_10_TheVagabond.mp4',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Charlie_Chaplin_Covers_the_World.jpg/200px-Charlie_Chaplin_Covers_the_World.jpg'),
        (4,
         'Night of the Living Dead',
         1968,
         ARRAY ['Sci-Fi','Horror'],
         5717,
-        'https://storage.cloud.google.com/movies-pdm/night_of_the_living_dead_512kb.mp4')
+        'https://storage.googleapis.com/movies-pdm/night_of_the_living_dead_512kb.mp4',
+        'https://upload.wikimedia.org/wikipedia/en/thumb/9/91/Night_of_the_Living_Dead_%281968%29_poster.jpg/220px-Night_of_the_Living_Dead_%281968%29_poster.jpg')
+ON CONFLICT DO NOTHING;
+
+INSERT INTO movie VALUES
+(3,
+    'The Letter, Lego movie',
+    2003,
+    ARRAY ['Animation','LEGO'],
+    390,
+    'https://storage.googleapis.com/movies-pdm/tl_512kb.mp4')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO users(username,password)

@@ -1,5 +1,5 @@
 ### Get All Movies
-### Sucessfull registration
+### Get the list of all the movies
 GET http://localhost:8080/movies/all
 
 

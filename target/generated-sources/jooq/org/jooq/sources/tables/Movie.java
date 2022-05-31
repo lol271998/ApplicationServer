@@ -9,7 +9,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row6;
+import org.jooq.Row7;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -73,6 +73,11 @@ public class Movie extends TableImpl<MovieRecord> {
      * The column <code>public.movie.link</code>.
      */
     public final TableField<MovieRecord, String> LINK = createField(DSL.name("link"), SQLDataType.VARCHAR(100).nullable(false), this, "");
+
+    /**
+     * The column <code>public.movie.link_pic</code>.
+     */
+    public final TableField<MovieRecord, String> LINK_PIC = createField(DSL.name("link_pic"), SQLDataType.VARCHAR(200), this, "");
 
     private Movie(Name alias, Table<MovieRecord> aliased) {
         this(alias, aliased, null);
@@ -149,11 +154,11 @@ public class Movie extends TableImpl<MovieRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row6 type methods
+    // Row7 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row6<Integer, String, Integer, String[], Integer, String> fieldsRow() {
-        return (Row6) super.fieldsRow();
+    public Row7<Integer, String, Integer, String[], Integer, String, String> fieldsRow() {
+        return (Row7) super.fieldsRow();
     }
 }

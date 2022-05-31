@@ -52,7 +52,7 @@ public class UserEndPoint {
 
         } catch (DataAccessException e) {
             e.printStackTrace();
-            return Response.status(409, "User Already exists").build();
+                return Response.status(409, "User Already exists").build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(500, "Unknown Server Error").build();
@@ -85,7 +85,10 @@ public class UserEndPoint {
             if (r.size() == 1) {
                 String storedPWD = create.select(Users.USERS.PASSWORD).from(Users.USERS).where(Users.USERS.USERNAME.eq(nick)).fetch("password").get(0).toString();
                 User u = new User(nick, pwd);
-                if (!u.checkPassword(storedPWD)) return Response.status(403, "Wrong password").build();
+                if (!u.checkPassword(storedPWD)) {
+                    System.out.println("Wrong password");
+                    return Response.status(403, "Wrong password").build();
+                }
                 return Response.ok("Login successful").build();
             }
             return Response.status(403, "User doesn't exist").build();
