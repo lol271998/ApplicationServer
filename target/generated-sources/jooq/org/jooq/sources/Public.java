@@ -11,7 +11,7 @@ import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
 import org.jooq.sources.tables.Movie;
-import org.jooq.sources.tables.Stream;
+import org.jooq.sources.tables.Streams;
 import org.jooq.sources.tables.Users;
 
 
@@ -34,9 +34,9 @@ public class Public extends SchemaImpl {
     public final Movie MOVIE = Movie.MOVIE;
 
     /**
-     * The table <code>public.stream</code>.
+     * The table <code>public.streams</code>.
      */
-    public final Stream STREAM = Stream.STREAM;
+    public final Streams STREAMS = Streams.STREAMS;
 
     /**
      * The table <code>public.users</code>.
@@ -60,7 +60,7 @@ public class Public extends SchemaImpl {
     public final List<Table<?>> getTables() {
         return Arrays.asList(
             Movie.MOVIE,
-            Stream.STREAM,
+            Streams.STREAMS,
             Users.USERS
         );
     }

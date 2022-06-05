@@ -1,12 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.app.MyResourceTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.54 s <<< FAILURE! - in com.app.MyResourceTest
-com.app.MyResourceTest  Time elapsed: 0.54 s  <<< ERROR!
-jakarta.ws.rs.ProcessingException: Exception thrown when trying to create jetty server.
-	at com.app.MyResourceTest.beforeAllTests(MyResourceTest.java:25)
-Caused by: java.io.IOException: Failed to bind to 0.0.0.0/0.0.0.0:8080
-	at com.app.MyResourceTest.beforeAllTests(MyResourceTest.java:25)
-Caused by: java.net.BindException: Endereço já em uso
-	at com.app.MyResourceTest.beforeAllTests(MyResourceTest.java:25)
-
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.866 s - in com.app.MyResourceTest

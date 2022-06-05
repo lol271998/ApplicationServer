@@ -2,7 +2,6 @@
 /home/fcd/Desktop/PDM/project/ApplicationServer/target/generated-sources/jooq/org/jooq/sources/Public.java
 /home/fcd/Desktop/PDM/project/ApplicationServer/src/main/java/com/app/UserEndPoint.java
 /home/fcd/Desktop/PDM/project/ApplicationServer/src/main/java/com/app/GlobalConst.java
-/home/fcd/Desktop/PDM/project/ApplicationServer/target/generated-sources/jooq/org/jooq/sources/tables/Stream.java
 /home/fcd/Desktop/PDM/project/ApplicationServer/target/generated-sources/jooq/org/jooq/sources/Tables.java
 /home/fcd/Desktop/PDM/project/ApplicationServer/src/main/java/com/app/MainApp.java
 /home/fcd/Desktop/PDM/project/ApplicationServer/target/generated-sources/jooq/org/jooq/sources/tables/records/MovieRecord.java
@@ -10,9 +9,12 @@
 /home/fcd/Desktop/PDM/project/ApplicationServer/target/generated-sources/jooq/org/jooq/sources/DefaultCatalog.java
 /home/fcd/Desktop/PDM/project/ApplicationServer/src/main/java/com/app/MoviesEndPoint.java
 /home/fcd/Desktop/PDM/project/ApplicationServer/target/generated-sources/jooq/org/jooq/sources/tables/Movie.java
+/home/fcd/Desktop/PDM/project/ApplicationServer/src/main/java/com/app/Stream.java
 /home/fcd/Desktop/PDM/project/ApplicationServer/src/main/java/com/app/Users_test.java
 /home/fcd/Desktop/PDM/project/ApplicationServer/src/main/java/com/app/User.java
 /home/fcd/Desktop/PDM/project/ApplicationServer/src/main/java/com/app/Movies.java
-/home/fcd/Desktop/PDM/project/ApplicationServer/target/generated-sources/jooq/org/jooq/sources/tables/records/StreamRecord.java
+/home/fcd/Desktop/PDM/project/ApplicationServer/target/generated-sources/jooq/org/jooq/sources/tables/Streams.java
+/home/fcd/Desktop/PDM/project/ApplicationServer/src/main/java/com/app/StreamEndPoint.java
 /home/fcd/Desktop/PDM/project/ApplicationServer/target/generated-sources/jooq/org/jooq/sources/tables/Users.java
+/home/fcd/Desktop/PDM/project/ApplicationServer/target/generated-sources/jooq/org/jooq/sources/tables/records/StreamsRecord.java
 /home/fcd/Desktop/PDM/project/ApplicationServer/target/generated-sources/jooq/org/jooq/sources/Keys.java

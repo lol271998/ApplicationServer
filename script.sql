@@ -38,15 +38,15 @@ create table if not exists users
 alter table users
     owner to fcd;
 
-create table if not exists stream
+create table if not exists streams
 (
-    stream_id integer not null
+    stream_id serial
         primary key,
-    user_id   integer not null
-        references users
+    stream_username varchar(50) UNIQUE,
+    stream_title varChar(50)
 );
 
-alter table stream
+alter table streams
     owner to fcd;
 
 

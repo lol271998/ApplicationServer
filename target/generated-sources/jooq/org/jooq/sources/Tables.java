@@ -5,7 +5,7 @@ package org.jooq.sources;
 
 
 import org.jooq.sources.tables.Movie;
-import org.jooq.sources.tables.Stream;
+import org.jooq.sources.tables.Streams;
 import org.jooq.sources.tables.Users;
 
 
@@ -21,9 +21,9 @@ public class Tables {
     public static final Movie MOVIE = Movie.MOVIE;
 
     /**
-     * The table <code>public.stream</code>.
+     * The table <code>public.streams</code>.
      */
-    public static final Stream STREAM = Stream.STREAM;
+    public static final Streams STREAMS = Streams.STREAMS;
 
     /**
      * The table <code>public.users</code>.
